@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "../config/db.js";
 import { authRouter } from "../routes/authRoutes.js";
+import { taskRouter } from "../routes/taskRoutes.js";
 
 // dotenv config
 dotenv.config();
@@ -20,7 +21,10 @@ connectDB();
 app.use(express.json());
 
 // Router for accessing auth routes
-app.use('/api/auth',authRouter)
+app.use("/api/auth", authRouter);
+
+// Router for accessing task routes
+app.use("/api/tasks", taskRouter);
 
 // Initialize cors
 app.use(cors());
@@ -31,5 +35,5 @@ app.get("/", (req, res) => {
 
 // Start server on port (in .env file)
 app.listen(PORT, () => {
-  console.log(`Server running at port ${PORT} http://localhost:${PORT}/`);
+  console.log(`Server running at port ${PORT}\nhttp://localhost:${PORT}/`);
 });
