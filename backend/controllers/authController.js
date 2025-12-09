@@ -34,7 +34,6 @@ export const signup = async (req, res) => {
     return res
       .status(201)
       .json({ message: "User registered successfully", token });
-
   } catch (error) {
     // error handling
     console.error("Signup error:", error);
@@ -83,11 +82,13 @@ export const login = async (req, res) => {
 export const getUser = async (req, res) => {
   try {
     // fetch user data from request
-    const user= await User.findById(req.userId).select("-password")
+    const user = await User.findById(req.userId).select("-password");
     if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
-    return res.status(200).json({ success: true, user:user });
+    return res.status(200).json({ success: true, user: user });
   } catch (error) {
     // error handling
     return res

@@ -2,7 +2,7 @@ import express from "express";
 import { getUser, login, signup } from "../controllers/authController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
-// router object for routing
+// router object for auth
 export const authRouter = express.Router();
 
 // Route for signup

@@ -8,7 +8,7 @@ export const createTask = async (req, res) => {
     const userId = req.userId;
     const user = await User.findById(userId);
     if (!user) {
-      res
+      return res
         .status(401)
         .json({ success: false, message: "Unauthorized, user not logged in" });
     }
@@ -40,7 +40,9 @@ export const createTask = async (req, res) => {
   } catch (error) {
     // error handling
     console.log("Error creating task", error);
-    res.status(500).json({ success: false, message: "Error creating task" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Error creating task" });
   }
 };
 
@@ -51,21 +53,23 @@ export const getTasks = async (req, res) => {
     const userId = req.userId;
     const user = await User.findById(userId);
     if (!user) {
-      res
+      return res
         .status(401)
         .json({ success: false, message: "Unauthorized, token invalid" });
     }
 
     // fetch tasks from database
     const tasks = await Task.find({ userId: userId }).sort({ createdAt: -1 });
-    if (tasks.length==0) {
+    if (tasks.length == 0) {
       res.status(400).json({ message: "User has no task", success: false });
     }
     return res.status(200).json({ success: true, tasks });
   } catch (error) {
     // error handling
     console.log("Error fetching tasks", error);
-    res.status(500).json({ success: false, message: "Error fetching tasks" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Error fetching tasks" });
   }
 };
 
@@ -76,7 +80,7 @@ export const updateTask = async (req, res) => {
     const userId = req.userId;
     const user = await User.findById(userId);
     if (!user) {
-      res
+      return res
         .status(401)
         .json({ success: false, message: "Unauthorized, token invalid" });
     }
@@ -103,7 +107,9 @@ export const updateTask = async (req, res) => {
   } catch (error) {
     // error handling
     console.log("Error updating task", error);
-    res.status(500).json({ success: false, message: "Error updating task" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Error updating task" });
   }
 };
 
@@ -138,6 +144,8 @@ export const deleteTask = async (req, res) => {
   } catch (error) {
     // error handling
     console.log("Error deleting task", error);
-    res.status(500).json({ success: false, message: "Error deleting task" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Error deleting task" });
   }
 };

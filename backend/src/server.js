@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "../config/db.js";
 import { authRouter } from "../routes/authRoutes.js";
 import { taskRouter } from "../routes/taskRoutes.js";
+import { routineRouter } from "../routes/routineRoutes.js";
 
 // dotenv config
 dotenv.config();
@@ -25,6 +26,9 @@ app.use("/api/auth", authRouter);
 
 // Router for accessing task routes
 app.use("/api/tasks", taskRouter);
+
+// Router for accessing routine routes
+app.use("/api/routines", routineRouter);
 
 // Initialize cors
 app.use(cors());
