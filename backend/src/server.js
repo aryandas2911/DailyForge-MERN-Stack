@@ -5,6 +5,7 @@ import connectDB from "../config/db.js";
 import { authRouter } from "../routes/authRoutes.js";
 import { taskRouter } from "../routes/taskRoutes.js";
 import { routineRouter } from "../routes/routineRoutes.js";
+import { progressRouter } from "../routes/progressRoutes.js";
 
 // dotenv config
 dotenv.config();
@@ -29,6 +30,9 @@ app.use("/api/tasks", taskRouter);
 
 // Router for accessing routine routes
 app.use("/api/routines", routineRouter);
+
+// Router for accessing progress routes
+app.use("/api/progress", progressRouter);
 
 // Initialize cors
 app.use(cors());
