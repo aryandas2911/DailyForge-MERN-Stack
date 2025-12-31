@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -9,16 +9,16 @@ const Navbar = () => {
         </a>
 
         <div className="flex items-center gap-4">
-          <a
-            href="#"
+          <Link
+            to="/login"
             className="text-muted hover:text-main transition-colors font-medium"
           >
-            Login
-          </a>
+            Login 
+          </Link>
 
-          <a href="#" className="btn btn-primary">
+          <Link to="/signup" className="btn btn-primary">
             Signup
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

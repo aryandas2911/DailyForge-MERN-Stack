@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 
 const Login = () => {
   // two states for inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // useNavigate object
+  const navigate = useNavigate();
 
   // submit handler
   const handleSubmit = async (e) => {
@@ -18,6 +22,15 @@ const Login = () => {
         password,
       });
       console.log("Login success: ", res.data);
+
+      // save token in localstorage for later api calls
+      localStorage.setItem("token", res.data.token);
+
+      // get user details
+      const me = await api.get("/auth/me");
+
+      // redirect to dashboard
+      navigate("/dashboard");
     } catch (error) {
       // handle error
       console.log("Login failed");
@@ -96,7 +109,12 @@ const Login = () => {
 
       <p className="text-center text-sm text-muted">
         Don't have an account?{" "}
-        <span className="text-main font-medium cursor-pointer hover:underline">
+        <span
+          onClick={() => {
+            navigate("/signup");
+          }}
+          className="text-main font-medium cursor-pointer hover:underline"
+        >
           Sign up
         </span>
       </p>
