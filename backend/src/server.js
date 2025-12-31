@@ -16,6 +16,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // Initialize express app
 const app = express();
 
+// Intialize cors
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 // Connect to MongoDB using mongoose
 connectDB();
 

@@ -1,6 +1,31 @@
-import React from "react";
+import { useState } from "react";
+import api from "../api/axios";
 
 const Login = () => {
+  // two states for inputs
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // submit handler
+  const handleSubmit = async (e) => {
+    // prevents page from refreshing
+    e.preventDefault();
+
+    // send request to server
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+      console.log("Login success: ", res.data);
+    } catch (error) {
+      // handle error
+      console.log("Login failed");
+      console.log(error.response?.data || error.message);
+    }
+  };
+
+  // login component
   return (
     <form
       className="
@@ -8,6 +33,7 @@ const Login = () => {
         w-full max-w-sm
         flex flex-col gap-6
       "
+      onSubmit={handleSubmit}
     >
       <div className="text-center space-y-1 mb-3">
         <h1 className="text-3xl font-bold text-main">Login</h1>
@@ -20,6 +46,10 @@ const Login = () => {
         <input
           type="email"
           id="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
           placeholder="user@email.com"
           required
           className="
@@ -40,6 +70,10 @@ const Login = () => {
         <input
           type="password"
           id="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           placeholder="••••••••"
           required
           className="

@@ -1,6 +1,33 @@
-import React from 'react'
+import { useState } from "react";
+import api from "../api/axios";
 
 const Signup = () => {
+  // three states for inputs
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // submit handler
+  const handleSubmit = async (e) => {
+    // prevents page from refreshing
+    e.preventDefault();
+
+    // send request to server
+    try {
+      const res = await api.post("/auth/signup", {
+        name,
+        email,
+        password,
+      });
+      console.log("Signup success: ", res.data);
+    } catch (error) {
+      // handle error
+      console.log("Signup failed");
+      console.log(error.response?.data || error.message);
+    }
+  };
+
+  // signup component
   return (
     <form
       className="
@@ -8,18 +35,23 @@ const Signup = () => {
         w-full max-w-sm
         flex flex-col gap-6
       "
+      onSubmit={handleSubmit}
     >
       <div className="text-center space-y-1 mb-3">
         <h1 className="text-3xl font-bold text-main">Signup</h1>
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="email" className="text-sm font-medium text-main">
+        <label htmlFor="name" className="text-sm font-medium text-main">
           Name
         </label>
         <input
-          type="name"
+          type="text"
           id="name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
           placeholder="Full Name"
           required
           className="
@@ -40,6 +72,10 @@ const Signup = () => {
         <input
           type="email"
           id="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
           placeholder="user@email.com"
           required
           className="
@@ -60,6 +96,10 @@ const Signup = () => {
         <input
           type="password"
           id="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           placeholder="••••••••"
           required
           className="
@@ -87,7 +127,7 @@ const Signup = () => {
         </span>
       </p>
     </form>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
