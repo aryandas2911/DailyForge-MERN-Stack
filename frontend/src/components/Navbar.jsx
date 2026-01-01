@@ -4,9 +4,9 @@ const Navbar = () => {
   return (
     <nav className="surface-bg fixed top-0 z-20 w-full border-soft">
       <div className="mx-auto max-w-7xl flex items-center justify-between p-4">
-        <a href="/">
+        <Link to="/login">
           <span className="text-2xl font-semibold text-main">DailyForge</span>
-        </a>
+        </Link>
 
         <div className="flex items-center gap-4">
           <Link
