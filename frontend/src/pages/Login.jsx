@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 const Login = () => {
   // two states for inputs
@@ -9,6 +10,9 @@ const Login = () => {
 
   // useNavigate object
   const navigate = useNavigate();
+
+  // useContext for auth
+  const { setUser, setToken } = useContext(AuthContext);
 
   // submit handler
   const handleSubmit = async (e) => {
@@ -28,6 +32,7 @@ const Login = () => {
 
       // get user details
       const me = await api.get("/auth/me");
+      setUser(me.data);
 
       // redirect to dashboard
       navigate("/dashboard");
