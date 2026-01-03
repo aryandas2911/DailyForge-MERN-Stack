@@ -86,8 +86,15 @@
   /* Card container */
   .card {
     background-color: var(--surface);
-    border: 1px solid var(--border);
     border-radius: var(--radius);
-    @apply p-5;
+    @apply p-6 shadow-sm;
+  }
+
+  .card-muted {
+    @apply bg-white/80;
+  }
+
+  .card-primary {
+    @apply shadow-md;
   }
 }
