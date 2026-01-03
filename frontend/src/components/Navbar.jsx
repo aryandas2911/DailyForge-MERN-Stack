@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { token, logout } = useContext(AuthContext); // assume logout is a function in your context
+  const { token, logout } = useContext(AuthContext);
 
   return (
     <nav className="surface-bg fixed top-0 z-20 w-full border-soft shadow-sm">

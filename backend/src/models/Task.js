@@ -9,7 +9,7 @@ const taskSchema = mongoose.Schema(
     },
     title: {
       type: String,
-      requried: true,
+      required: true,
     },
     description: {
       type: String,
@@ -27,11 +27,11 @@ const taskSchema = mongoose.Schema(
     status: {
       type: String,
       required: true,
-      enum: ["Due", "Ongoing", "Completed"],
+      enum: ["Due", "Completed"],
     },
-    updatedAt: {
+    dueDate: {
       type: Date,
-      default: Date.now(),
+      required: true,
     },
   },
   { timestamps: true }

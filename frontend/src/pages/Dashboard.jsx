@@ -1,45 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import {
-  Sun,
-  CheckCircle2,
-  Calendar,
-  Flame,
-  Plus,
-  Puzzle,
-  Moon,
-  LogOut,
-} from "lucide-react";
+import { CheckCircle2, Calendar, Flame, Plus, Puzzle } from "lucide-react";
 
-import StatCard from "../components/StatCard";
-import TaskPreview from "../components/TaskPreview";
-import InsightCard from "../components/InsightCard";
-import TodayTasks from "../components/TodayTasks";
+import StatCard from "../components/Dashboard/StatCard";
+import TaskPreview from "../components/Dashboard/TaskPreview";
+import InsightCard from "../components/Dashboard/InsightCard";
+import DashboardTasks from "../components/Dashboard/DashboardTasks";
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
-
-  // Sample Data
-  const routineTasks = [
-    {
-      time: "06:00 - 07:00",
-      title: "Morning Gym",
-      duration: "1h",
-      color: "border-green-400",
-    },
-    {
-      time: "07:30 - 08:00",
-      title: "Breakfast & Planning",
-      duration: "30m",
-      color: "border-blue-400",
-    },
-    {
-      time: "09:00 - 11:00",
-      title: "Project Work",
-      duration: "2h",
-      color: "border-purple-400",
-    },
-  ];
 
   const upcomingTasks = [
     { title: "DSA Practice", due: "Today", color: "bg-red-400" },
@@ -71,15 +40,6 @@ export default function Dashboard() {
               })
               .replace(",", " ·")}
           </p>
-        </div>
-
-        <div className="flex items-center gap-3 flex-wrap">
-          <button className="btn btn-primary flex items-center gap-1 px-3 py-2 text-sm shadow-sm">
-            <Plus size={16} /> Add Task
-          </button>
-          <button className="btn btn-primary flex items-center gap-1 px-3 py-2 text-sm shadow-sm">
-            <Puzzle size={16} /> Build Routine
-          </button>
         </div>
       </header>
 
@@ -113,7 +73,7 @@ export default function Dashboard() {
 
       {/* Today's Tasks */}
       <div className="w-full">
-        <TodayTasks tasks={routineTasks} />
+        <DashboardTasks />
       </div>
 
       {/* Bottom Row: TaskPreview + Insights */}
