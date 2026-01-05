@@ -64,7 +64,7 @@ export default function Tasks() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => navigate("/dashboard")}
-              className="rounded-lg p-2 border border-soft text-muted hover:bg-white"
+              className="rounded-lg p-2 border border-soft text-muted hover:bg-white cursor-pointer"
             >
               <ArrowLeft size={16} />
             </button>
@@ -83,7 +83,7 @@ export default function Tasks() {
               setEditingTask(null);
               setIsModalOpen(true);
             }}
-            className="btn btn-primary flex items-center gap-2"
+            className="btn btn-primary flex items-center gap-2 cursor-pointer"
           >
             <Plus size={18} /> New Task
           </button>
@@ -126,7 +126,7 @@ export default function Tasks() {
               </h3>
               <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all"
+                  className="h-full bg-linear-to-r from-blue-500 to-indigo-500 transition-all"
                   style={{ width: `${completionPercent}%` }}
                 />
               </div>

@@ -33,7 +33,7 @@ export default function TaskItem({ task, onToggleComplete, onDelete, onUpdate })
             onClick={() => onToggleComplete(task)}
             className={`
               w-8 h-8 rounded-md flex items-center justify-center
-              border-soft shrink-0
+              border-soft shrink-0 cursor-pointer
               ${isCompleted ? "bg-(--primary) text-white" : "bg-white"}
             `}
           >
@@ -67,7 +67,7 @@ export default function TaskItem({ task, onToggleComplete, onDelete, onUpdate })
             {/* Edit Button */}
             <button
               onClick={() => setIsEditModalOpen(true)}
-              className="p-2 rounded-lg hover:bg-white transition"
+              className="p-2 rounded-lg hover:bg-white transition cursor-pointer"
             >
               <Pencil size={18} className="text-main" />
             </button>
@@ -75,7 +75,7 @@ export default function TaskItem({ task, onToggleComplete, onDelete, onUpdate })
             {/* Delete Button */}
             <button
               onClick={() => onDelete(task._id)}
-              className="p-2 rounded-lg hover:bg-red-100 transition"
+              className="p-2 rounded-lg hover:bg-red-100 transition cursor-pointer"
             >
               <Trash2 size={18} className="text-red-500" />
             </button>

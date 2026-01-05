@@ -17,17 +17,17 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="text-muted hover:text-main transition-colors font-medium"
+                className="text-muted hover:text-main transition-colors font-medium cursor-pointer"
               >
                 Login
               </Link>
 
-              <Link to="/signup" className="btn btn-primary">
+              <Link to="/signup" className="btn btn-primary cursor-pointer">
                 Signup
               </Link>
             </>
           ) : (
-            <button onClick={logout} className="btn btn-primary px-4 py-2">
+            <button onClick={logout} className="btn btn-primary px-4 py-2 cursor-pointer">
               Logout
             </button>
           )}
