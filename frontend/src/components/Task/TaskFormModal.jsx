@@ -121,6 +121,7 @@ export default function TaskFormModal({ task, onClose, onSubmit }) {
           <button
             type="submit"
             className="w-full btn btn-primary py-2 mt-2"
+            onSubmit={handleSubmit}
           >
             {task ? "Update Task" : "Add Task"}
           </button>

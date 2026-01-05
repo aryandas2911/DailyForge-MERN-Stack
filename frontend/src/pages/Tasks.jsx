@@ -22,9 +22,9 @@ export default function Tasks() {
   const handleSubmit = async (data) => {
     try {
       if (editingTask) {
-        await updateTask(editingTask._id, data); // update existing
+        await updateTask(editingTask._id, data);
       } else {
-        await addTask({ ...data, status: "Due" }); // create new
+        await addTask({ ...data, status: "Due" });
       }
       setEditingTask(null);
       setIsModalOpen(false);
@@ -105,6 +105,7 @@ export default function Tasks() {
                       setEditingTask(task);
                       setIsModalOpen(true);
                     }}
+                    onUpdate={updateTask}
                   />
                 ))
             ) : (
