@@ -6,6 +6,7 @@ import Signup from "./pages/Signup.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 import Tasks from "./pages/Tasks.jsx";
+import RoutineBuilder from "./pages/RoutineBuilder.jsx";
 
 const App = () => {
   return (
@@ -28,6 +29,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <Tasks />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/routine-builder"
+            element={
+              <ProtectedRoutes>
+                <RoutineBuilder />
               </ProtectedRoutes>
             }
           />
