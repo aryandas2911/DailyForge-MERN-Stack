@@ -14,6 +14,7 @@ const App = () => {
       <Navbar />
       <main className="app-bg min-h-screen pt-15 flex justify-center items-center">
         <Routes>
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route

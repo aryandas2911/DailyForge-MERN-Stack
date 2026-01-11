@@ -53,6 +53,7 @@ const Signup = () => {
         surface-bg px-10 py-15 rounded-2xl
         w-full max-w-sm
         flex flex-col gap-6
+        animate-in
       "
       onSubmit={handleSubmit}
     >
@@ -80,6 +81,7 @@ const Signup = () => {
             border-soft
             rounded-sm
             shadow-xs
+            input-focus hover-lift
           "
         />
       </div>
@@ -104,6 +106,7 @@ const Signup = () => {
             border-soft
             rounded-sm
             shadow-xs
+            input-focus hover-lift
           "
         />
       </div>
@@ -128,13 +131,14 @@ const Signup = () => {
             border-soft
             rounded-base
             shadow-xs
+            input-focus hover-lift
           "
         />
       </div>
 
       <button
         type="submit"
-        className="btn btn-primary cursor-pointer w-full mt-2"
+        className="btn btn-primary cursor-pointer w-full mt-2 hover-lift"
       >
         Sign Up
       </button>
@@ -145,7 +149,7 @@ const Signup = () => {
           onClick={() => {
             navigate("/login");
           }}
-          className="text-main font-medium cursor-pointer hover:underline"
+          className="text-main font-medium cursor-pointer hover:underline transition-colors"
         >
           Login
         </span>

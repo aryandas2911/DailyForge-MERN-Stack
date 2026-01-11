@@ -36,8 +36,8 @@ export default function TaskFormModal({ task, onClose, onSubmit }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 animate-in">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative animate-in delay-100">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -120,7 +120,7 @@ export default function TaskFormModal({ task, onClose, onSubmit }) {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full btn btn-primary py-2 mt-2"
+            className="w-full btn btn-primary py-2 mt-2 hover-lift"
             onSubmit={handleSubmit}
           >
             {task ? "Update Task" : "Add Task"}

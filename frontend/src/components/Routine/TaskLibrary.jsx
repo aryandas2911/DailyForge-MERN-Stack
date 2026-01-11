@@ -27,7 +27,7 @@ function DraggableTask({ task }) {
       {...attributes}
       className="group flex items-center gap-3 rounded-xl border-soft bg-white/80 p-3
                  cursor-grab active:cursor-grabbing
-                 hover:bg-white hover:shadow-md transition"
+                 hover:bg-white hover:shadow-md transition hover-lift"
     >
       {/* Color dot */}
       <span
@@ -60,7 +60,7 @@ export default function TaskLibrary({ onAddTask }) {
   );
 
   return (
-    <div className="card card-muted h-full flex flex-col">
+    <div className="card card-muted h-full flex flex-col animate-in">
       {/* Header */}
       <div className="mb-4">
         <h2 className="text-lg font-semibold text-main">Task Library</h2>
@@ -90,7 +90,7 @@ export default function TaskLibrary({ onAddTask }) {
       </div>
 
       {/* Footer CTA */}
-      <button className="btn btn-primary w-full mt-4 cursor-pointer" onClick={onAddTask}>
+      <button className="btn btn-primary w-full mt-4 cursor-pointer hover-lift" onClick={onAddTask}>
         + Add Task
       </button>
     </div>

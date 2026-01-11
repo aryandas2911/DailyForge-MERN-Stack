@@ -7,6 +7,7 @@ import StatCard from "../components/Dashboard/StatCard";
 import TaskPreview from "../components/Dashboard/TaskPreview";
 import DashboardTasks from "../components/Dashboard/DashboardTasks";
 import api from "../api/axios.js";
+import useTasks from "../hooks/useTasks.js";
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
@@ -15,12 +16,28 @@ export default function Dashboard() {
   const [savedRoutines, setSavedRoutines] = useState([]);
   const [loadingRoutines, setLoadingRoutines] = useState(false);
 
-  const upcomingTasks = [
-    { title: "DSA Practice", due: "Today", color: "bg-red-400" },
-    { title: "Read ML Paper", due: "Tomorrow", color: "bg-yellow-400" },
-    { title: "React Component", due: "Today", color: "bg-green-400" },
-    { title: "Write Blog", due: "Tomorrow", color: "bg-blue-400" },
-  ];
+  const { tasks } = useTasks();
+
+  const today = new Date();
+
+  const todayTasks = tasks.filter((task) => {
+    const created = new Date(task.createdAt);
+    return (
+      today.getFullYear() === created.getFullYear() &&
+      today.getMonth() === created.getMonth() &&
+      today.getDate() === created.getDate()
+    );
+  });
+
+  const completedToday = todayTasks.filter(
+    (task) => task.status === "Completed"
+  ).length;
+
+  const totalToday = todayTasks.length;
+
+  const upcomingTasks = tasks
+    .filter((task) => task.status !== "Completed")
+    .slice(0, 2);
 
   // Fetch routines
   const fetchRoutines = async () => {
@@ -41,9 +58,9 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full max-w-[1440px] mx-auto app-bg px-6 py-8 space-y-8">
+    <div className="min-h-screen w-full max-w-[1440px] mx-auto app-bg px-6 py-8 space-y-8 animate-in">
       {/* Header */}
-      <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center p-6 shadow-md rounded-xl bg-(--surface) gap-4">
+      <header className="animate-in flex flex-col lg:flex-row justify-between items-start lg:items-center p-6 shadow-md rounded-xl bg-(--surface) gap-4">
         <div>
           <h1 className="text-2xl font-semibold text-main leading-tight">
             Good afternoon, {user?.name}
@@ -62,15 +79,15 @@ export default function Dashboard() {
 
       {/* Stats Row */}
       <section className="flex flex-col lg:flex-row gap-6 w-full">
-        <div className="flex-1">
+        <div className="flex-1 animate-in delay-100">
           <StatCard
             label="Today"
-            value="3 / 5"
+            value={`${completedToday} / ${totalToday}`}
             subtitle="Tasks done"
             icon={<CheckCircle2 size={20} />}
           />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 animate-in delay-200">
           <StatCard
             label="This Week"
             value="72%"
@@ -78,30 +95,22 @@ export default function Dashboard() {
             icon={<Calendar size={20} />}
           />
         </div>
-        <div className="flex-1">
-          <StatCard
-            label="Streak"
-            value="5"
-            subtitle="Days"
-            icon={<Flame size={20} />}
-          />
-        </div>
       </section>
 
       {/* Today's Tasks */}
-      <div className="w-full">
+      <div className="w-full animate-in delay-200">
         <DashboardTasks />
       </div>
 
       {/* Bottom Row: TaskPreview + Routines */}
-      <section className="flex flex-col lg:flex-row gap-6 w-full">
+      <section className="flex animate-in delay-200 flex-col lg:flex-row gap-6 w-full">
         {/* Upcoming Tasks */}
-        <div className="flex-1">
+        <div className="flex-1 animate-in delay-300">
           <TaskPreview tasks={upcomingTasks} />
         </div>
 
         {/* Saved Routines */}
-        <div className="flex-1 flex flex-col bg-white/80 rounded-xl shadow-md p-4 h-59 overflow-y-auto relative">
+        <div className="flex-1 animate-in delay-300 flex flex-col bg-white/80 rounded-xl shadow-md p-4 h-74 overflow-y-auto relative">
           {/* Header with button */}
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-main">Saved Routines</h2>
@@ -125,7 +134,7 @@ export default function Dashboard() {
               {savedRoutines.map((routine) => (
                 <li
                   key={routine._id}
-                  className="border border-soft rounded-lg p-2 bg-white/80 shadow-sm"
+                  className="border border-soft rounded-lg p-2 bg-white/80 shadow-sm hover-lift animate-in"
                 >
                   <p className="font-medium text-main">{routine.name}</p>
                   <p className="text-xs text-muted">

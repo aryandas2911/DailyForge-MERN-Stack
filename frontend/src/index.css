@@ -98,3 +98,45 @@
     @apply shadow-md;
   }
 }
+
+@layer utilities {
+  /* Fade + slide up on mount */
+  .animate-in {
+    animation: fadeUp 0.4s ease-out both;
+  }
+
+  .animate-in-slow {
+    animation: fadeUp 0.6s ease-out both;
+  }
+
+  /* Stagger helpers */
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  /* Hover lift */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

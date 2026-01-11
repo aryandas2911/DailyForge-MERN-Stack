@@ -112,9 +112,9 @@ export default function RoutineBuilder() {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <div className="app-bg min-h-screen px-6 py-8">
+      <div className="app-bg min-h-screen px-6 py-8 animate-in">
         {/* Header */}
-        <header className="mb-8 flex items-start gap-4">
+        <header className="mb-8 flex items-start gap-4 animate-in delay-100">
           <button
             onClick={() => navigate("/dashboard")}
             className="mt-1 rounded-lg p-2 border border-soft text-muted hover:bg-white transition cursor-pointer"
@@ -131,7 +131,7 @@ export default function RoutineBuilder() {
         </header>
 
         {/* Main Layout */}
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-12 gap-6 animate-in delay-200">
           <aside className="col-span-12 md:col-span-3">
             <TaskLibrary onAddTask={() => setIsModalOpen(true)} />
           </aside>
@@ -145,7 +145,7 @@ export default function RoutineBuilder() {
         </div>
 
         {/* ================= Saved Routines ================= */}
-        <section className="mt-10">
+        <section className="mt-10 animate-in delay-300">
           <h2 className="text-xl font-semibold text-main mb-4">
             Saved Routines
           </h2>
@@ -222,8 +222,8 @@ export default function RoutineBuilder() {
       </div>
 
       {isSaveModalOpen && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="card card-primary w-full max-w-md">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 animate-in">
+          <div className="card card-primary w-full max-w-md animate-in delay-100">
             <h3 className="text-lg font-semibold text-main mb-2">
               Save {selectedDay} Routine
             </h3>

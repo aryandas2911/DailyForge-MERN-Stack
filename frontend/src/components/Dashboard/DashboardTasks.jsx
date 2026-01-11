@@ -70,8 +70,7 @@ export default function DashboardTasks() {
                 checked={task.status === "Completed"}
                 onChange={() =>
                   updateTask(task._id, {
-                    status:
-                      task.status === "Completed" ? "Due" : "Completed",
+                    status: task.status === "Completed" ? "Due" : "Completed",
                   })
                 }
               />
@@ -90,15 +89,15 @@ export default function DashboardTasks() {
 
                 <div className="flex items-center gap-2 mt-1">
                   <span
-                    className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${priorityBadge[task.priority]}`}
+                    className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
+                      priorityBadge[task.priority]
+                    }`}
                   >
                     {task.priority}
                   </span>
 
                   {task.status === "Completed" && (
-                    <span className="text-[11px] text-muted">
-                      Completed
-                    </span>
+                    <span className="text-[11px] text-muted">Completed</span>
                   )}
                 </div>
               </div>

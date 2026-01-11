@@ -5,7 +5,6 @@ import connectDB from "../config/db.js";
 import { authRouter } from "../routes/authRoutes.js";
 import { taskRouter } from "../routes/taskRoutes.js";
 import { routineRouter } from "../routes/routineRoutes.js";
-import { progressRouter } from "../routes/progressRoutes.js";
 
 // dotenv config
 dotenv.config();

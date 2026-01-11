@@ -21,6 +21,7 @@ export default function TaskItem({ task, onToggleComplete, onDelete, onUpdate })
     <>
       <div
         className={`
+          animate-in hover-lift
           w-full rounded-xl border-l-4
           ${priorityStyles[task.priority]}
           ${isCompleted ? "opacity-70" : ""}
@@ -34,6 +35,7 @@ export default function TaskItem({ task, onToggleComplete, onDelete, onUpdate })
             className={`
               w-8 h-8 rounded-md flex items-center justify-center
               border-soft shrink-0 cursor-pointer
+              transition-transform duration-150
               ${isCompleted ? "bg-(--primary) text-white" : "bg-white"}
             `}
           >

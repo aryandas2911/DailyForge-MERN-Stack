@@ -52,7 +52,7 @@ function DroppableCell({ day, time, tasks }) {
           key={task.taskId}
           className="absolute inset-1 rounded-lg bg-blue-500
                      text-white text-xs font-medium
-                     flex items-center justify-center shadow"
+                     flex items-center justify-center shadow animate-in"
         >
           {task.title}
         </div>
@@ -64,7 +64,7 @@ function DroppableCell({ day, time, tasks }) {
 /* ---------------- Weekly Grid ---------------- */
 export default function WeeklyGrid({ scheduledTasks, onSaveDay }) {
   return (
-    <div className="card card-primary overflow-x-auto">
+    <div className="card card-primary overflow-x-auto animate-in">
       <h2 className="text-lg font-semibold text-main mb-4">Weekly Schedule</h2>
 
       <div
@@ -79,7 +79,7 @@ export default function WeeklyGrid({ scheduledTasks, onSaveDay }) {
           <div key={`save-${day}`} className="flex justify-center pb-2">
             <button
               onClick={() => onSaveDay(day)}
-              className="btn btn-primary px-3 py-1 text-xs cursor-pointer"
+              className="btn btn-primary px-3 py-1 text-xs cursor-pointer hover-lift"
             >
               Save
             </button>

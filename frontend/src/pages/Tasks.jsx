@@ -57,10 +57,10 @@ export default function Tasks() {
   const isOverloaded = highPriorityCount >= 3;
 
   return (
-    <div className="min-h-screen app-bg px-6 lg:px-12 py-8">
+    <div className="min-h-screen app-bg px-6 lg:px-12 py-8 animate-in">
       <div className="max-w-[1200px] mx-auto space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between gap-6 flex-wrap">
+        <div className="flex items-center justify-between gap-6 flex-wrap animate-in delay-100">
           <div className="flex items-center gap-4">
             <button
               onClick={() => navigate("/dashboard")}
@@ -91,7 +91,7 @@ export default function Tasks() {
 
         {/* Task List */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 animate-in delay-200">
             {tasks.length ? (
               tasks
                 .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
@@ -119,7 +119,7 @@ export default function Tasks() {
           </div>
 
           {/* Insights */}
-          <div className="hidden lg:flex flex-col gap-6">
+          <div className="hidden lg:flex flex-col gap-6 animate-in delay-300">
             <div className="card p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-main mb-2">
                 Completion
