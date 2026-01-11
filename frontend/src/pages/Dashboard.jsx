@@ -1,14 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { CheckCircle2, Calendar, Flame, Plus, Puzzle } from "lucide-react";
+import { CheckCircle2, Calendar, Flame, ArrowRight } from "lucide-react";
 
 import StatCard from "../components/Dashboard/StatCard";
 import TaskPreview from "../components/Dashboard/TaskPreview";
-import InsightCard from "../components/Dashboard/InsightCard";
 import DashboardTasks from "../components/Dashboard/DashboardTasks";
+import api from "../api/axios.js";
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [savedRoutines, setSavedRoutines] = useState([]);
+  const [loadingRoutines, setLoadingRoutines] = useState(false);
 
   const upcomingTasks = [
     { title: "DSA Practice", due: "Today", color: "bg-red-400" },
@@ -17,11 +22,23 @@ export default function Dashboard() {
     { title: "Write Blog", due: "Tomorrow", color: "bg-blue-400" },
   ];
 
-  const insights = [
-    { icon: "⚠️", message: "Wednesday is overloaded" },
-    { icon: "💤", message: "Sleep < 6h" },
-    { icon: "🧘", message: "No breaks scheduled today" },
-  ];
+  // Fetch routines
+  const fetchRoutines = async () => {
+    try {
+      setLoadingRoutines(true);
+      const res = await api.get("/routines");
+      setSavedRoutines(res.data.routines || []);
+    } catch (err) {
+      console.error(err);
+      setSavedRoutines([]);
+    } finally {
+      setLoadingRoutines(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRoutines();
+  }, []);
 
   return (
     <div className="min-h-screen w-full max-w-[1440px] mx-auto app-bg px-6 py-8 space-y-8">
@@ -76,13 +93,49 @@ export default function Dashboard() {
         <DashboardTasks />
       </div>
 
-      {/* Bottom Row: TaskPreview + Insights */}
+      {/* Bottom Row: TaskPreview + Routines */}
       <section className="flex flex-col lg:flex-row gap-6 w-full">
+        {/* Upcoming Tasks */}
         <div className="flex-1">
           <TaskPreview tasks={upcomingTasks} />
         </div>
-        <div className="flex-1">
-          <InsightCard insights={insights} />
+
+        {/* Saved Routines */}
+        <div className="flex-1 flex flex-col bg-white/80 rounded-xl shadow-md p-4 h-59 overflow-y-auto relative">
+          {/* Header with button */}
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold text-main">Saved Routines</h2>
+            <button
+              className="text-sm text-primary hover:underline underline-offset-4 cursor-pointer flex items-center gap-1"
+              onClick={() => navigate("/routine-builder")}
+            >
+              Build
+              <ArrowRight size={16} />
+            </button>
+          </div>
+
+          {loadingRoutines ? (
+            <p className="text-sm text-muted">Loading routines…</p>
+          ) : savedRoutines.length === 0 ? (
+            <p className="text-sm text-muted text-center mt-10">
+              No routines saved yet
+            </p>
+          ) : (
+            <ul className="space-y-3">
+              {savedRoutines.map((routine) => (
+                <li
+                  key={routine._id}
+                  className="border border-soft rounded-lg p-2 bg-white/80 shadow-sm"
+                >
+                  <p className="font-medium text-main">{routine.name}</p>
+                  <p className="text-xs text-muted">
+                    {routine.items.length} tasks across{" "}
+                    {new Set(routine.items.map((i) => i.day)).size} day(s)
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </section>
     </div>

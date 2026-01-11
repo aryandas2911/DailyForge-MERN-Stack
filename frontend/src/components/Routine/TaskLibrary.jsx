@@ -1,6 +1,56 @@
 import { useState } from "react";
+import { useDraggable } from "@dnd-kit/core";
 import useTasks from "../../hooks/useTasks.js";
 
+/* ---------------- Draggable Task Item ---------------- */
+function DraggableTask({ task }) {
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: task._id,
+      data: {
+        task,
+      },
+    });
+
+  const style = {
+    transform: transform
+      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+      : undefined,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="group flex items-center gap-3 rounded-xl border-soft bg-white/80 p-3
+                 cursor-grab active:cursor-grabbing
+                 hover:bg-white hover:shadow-md transition"
+    >
+      {/* Color dot */}
+      <span
+        className="h-3 w-3 rounded-full"
+        style={{
+          backgroundColor:
+            task.priority === "High"
+              ? "#ef4444"
+              : task.priority === "Medium"
+              ? "#f59e0b"
+              : "#10b981",
+        }}
+      />
+
+      {/* Title */}
+      <p className="flex-1 text-sm font-medium text-main truncate">
+        {task.title}
+      </p>
+    </div>
+  );
+}
+
+/* ---------------- Task Library ---------------- */
 export default function TaskLibrary({ onAddTask }) {
   const { tasks } = useTasks();
   const [query, setQuery] = useState("");
@@ -27,33 +77,10 @@ export default function TaskLibrary({ onAddTask }) {
       />
 
       {/* Task List */}
-      <div className="flex-1 space-y-3 overflow-auto pr-1">
+      <div className="flex-1 space-y-3 pr-1">
         {filteredTasks?.length ? (
           filteredTasks.map((task) => (
-            <div
-              key={task._id}
-              className="group flex items-center gap-3 rounded-xl border-soft bg-white/80 p-3
-                         cursor-grab active:cursor-grabbing
-                         hover:bg-white hover:shadow-md transition"
-            >
-              {/* Color dot */}
-              <span
-                className="h-3 w-3 rounded-full"
-                style={{
-                  backgroundColor:
-                    task.priority === "High"
-                      ? "#ef4444"
-                      : task.priority === "Medium"
-                      ? "#f59e0b"
-                      : "#10b981",
-                }}
-              />
-
-              {/* Title */}
-              <p className="flex-1 text-sm font-medium text-main truncate">
-                {task.title}
-              </p>
-            </div>
+            <DraggableTask key={task._id} task={task} />
           ))
         ) : (
           <div className="text-sm text-muted text-center py-8">
@@ -63,7 +90,7 @@ export default function TaskLibrary({ onAddTask }) {
       </div>
 
       {/* Footer CTA */}
-      <button className="btn btn-primary w-full mt-4" onClick={onAddTask}>
+      <button className="btn btn-primary w-full mt-4 cursor-pointer" onClick={onAddTask}>
         + Add Task
       </button>
     </div>

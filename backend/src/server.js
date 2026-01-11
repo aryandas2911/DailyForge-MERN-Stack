@@ -39,9 +39,6 @@ app.use("/api/tasks", taskRouter);
 // Router for accessing routine routes
 app.use("/api/routines", routineRouter);
 
-// Router for accessing progress routes
-app.use("/api/progress", progressRouter);
-
 // Initialize cors
 app.use(cors());
 
