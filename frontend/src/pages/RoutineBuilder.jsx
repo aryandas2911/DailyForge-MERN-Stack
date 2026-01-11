@@ -244,7 +244,7 @@ export default function RoutineBuilder() {
                 Cancel
               </button>
               <button
-                className="btn btn-primary"
+                className="btn btn-primary cursor-pointer"
                 onClick={confirmSaveRoutine}
                 disabled={!routineName.trim()}
               >
