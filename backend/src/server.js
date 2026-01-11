@@ -18,7 +18,7 @@ const app = express();
 // Intialize cors
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://dailyforge-frontend-lhjq.onrender.com",
     credentials: true,
   })
 );
@@ -37,9 +37,6 @@ app.use("/api/tasks", taskRouter);
 
 // Router for accessing routine routes
 app.use("/api/routines", routineRouter);
-
-// Initialize cors
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Server running");
